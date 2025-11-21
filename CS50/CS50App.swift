@@ -30,3 +30,4 @@ struct CS50App: App {
         .modelContainer(sharedModelContainer)
     }
 }
+

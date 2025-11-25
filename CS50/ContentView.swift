@@ -14,7 +14,11 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
    
-    @StateObject private var locationManager = LocationManager()
+    @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+)
     
     var body: some View {
         TabView{
@@ -51,7 +55,12 @@ struct ContentView: View {
                 Label("First page", systemImage: "lit.bullet")
             }
             
-            Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
+            Map(position: $camera)
+                .mapControls {
+                        MapUserLocationButton()
+                        MapCompass()
+                    }
+                
                 .tabItem{
                     Label("Map", systemImage: "map")
                 }

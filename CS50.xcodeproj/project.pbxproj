@@ -21,12 +21,29 @@
 			remoteGlobalIDString = 713FD76E2ED0177200EC8EA8;
 			remoteInfo = CS50;
 		};
+		9A6DA9012ED6C4E700847200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 713FD7672ED0177200EC8EA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A6DA8EF2ED6C4E700847200;
+			remoteInfo = "CS50 IOS";
+		};
+		9A6DA90B2ED6C4E700847200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 713FD7672ED0177200EC8EA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A6DA8EF2ED6C4E700847200;
+			remoteInfo = "CS50 IOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		713FD76F2ED0177200EC8EA8 /* CS50.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS50.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		713FD77E2ED0177400EC8EA8 /* CS50Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS50Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		713FD7882ED0177400EC8EA8 /* CS50UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CS50UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A6DA8F02ED6C4E700847200 /* CS50 IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS50 IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A6DA9002ED6C4E700847200 /* CS50 IOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CS50 IOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A6DA90A2ED6C4E700847200 /* CS50 IOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CS50 IOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +53,13 @@
 				Info.plist,
 			);
 			target = 713FD76E2ED0177200EC8EA8 /* CS50 */;
+		};
+		9A6DA9122ED6C4E800847200 /* Exceptions for "CS50 IOS" folder in "CS50 IOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -56,6 +80,24 @@
 		713FD78B2ED0177400EC8EA8 /* CS50UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CS50UITests;
+			sourceTree = "<group>";
+		};
+		9A6DA8F12ED6C4E700847200 /* CS50 IOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9A6DA9122ED6C4E800847200 /* Exceptions for "CS50 IOS" folder in "CS50 IOS" target */,
+			);
+			path = "CS50 IOS";
+			sourceTree = "<group>";
+		};
+		9A6DA9032ED6C4E700847200 /* CS50 IOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "CS50 IOSTests";
+			sourceTree = "<group>";
+		};
+		9A6DA90D2ED6C4E700847200 /* CS50 IOSUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "CS50 IOSUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,6 +124,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9A6DA8ED2ED6C4E700847200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA8FD2ED6C4E700847200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA9072ED6C4E700847200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +154,9 @@
 				713FD7712ED0177200EC8EA8 /* CS50 */,
 				713FD7812ED0177400EC8EA8 /* CS50Tests */,
 				713FD78B2ED0177400EC8EA8 /* CS50UITests */,
+				9A6DA8F12ED6C4E700847200 /* CS50 IOS */,
+				9A6DA9032ED6C4E700847200 /* CS50 IOSTests */,
+				9A6DA90D2ED6C4E700847200 /* CS50 IOSUITests */,
 				713FD7702ED0177200EC8EA8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +167,9 @@
 				713FD76F2ED0177200EC8EA8 /* CS50.app */,
 				713FD77E2ED0177400EC8EA8 /* CS50Tests.xctest */,
 				713FD7882ED0177400EC8EA8 /* CS50UITests.xctest */,
+				9A6DA8F02ED6C4E700847200 /* CS50 IOS.app */,
+				9A6DA9002ED6C4E700847200 /* CS50 IOSTests.xctest */,
+				9A6DA90A2ED6C4E700847200 /* CS50 IOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,6 +245,74 @@
 			productReference = 713FD7882ED0177400EC8EA8 /* CS50UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9A6DA8EF2ED6C4E700847200 /* CS50 IOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A6DA9132ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOS" */;
+			buildPhases = (
+				9A6DA8EC2ED6C4E700847200 /* Sources */,
+				9A6DA8ED2ED6C4E700847200 /* Frameworks */,
+				9A6DA8EE2ED6C4E700847200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9A6DA8F12ED6C4E700847200 /* CS50 IOS */,
+			);
+			name = "CS50 IOS";
+			packageProductDependencies = (
+			);
+			productName = "CS50 IOS";
+			productReference = 9A6DA8F02ED6C4E700847200 /* CS50 IOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A6DA8FF2ED6C4E700847200 /* CS50 IOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A6DA9162ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOSTests" */;
+			buildPhases = (
+				9A6DA8FC2ED6C4E700847200 /* Sources */,
+				9A6DA8FD2ED6C4E700847200 /* Frameworks */,
+				9A6DA8FE2ED6C4E700847200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A6DA9022ED6C4E700847200 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9A6DA9032ED6C4E700847200 /* CS50 IOSTests */,
+			);
+			name = "CS50 IOSTests";
+			packageProductDependencies = (
+			);
+			productName = "CS50 IOSTests";
+			productReference = 9A6DA9002ED6C4E700847200 /* CS50 IOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9A6DA9092ED6C4E700847200 /* CS50 IOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A6DA9192ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOSUITests" */;
+			buildPhases = (
+				9A6DA9062ED6C4E700847200 /* Sources */,
+				9A6DA9072ED6C4E700847200 /* Frameworks */,
+				9A6DA9082ED6C4E700847200 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A6DA90C2ED6C4E700847200 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9A6DA90D2ED6C4E700847200 /* CS50 IOSUITests */,
+			);
+			name = "CS50 IOSUITests";
+			packageProductDependencies = (
+			);
+			productName = "CS50 IOSUITests";
+			productReference = 9A6DA90A2ED6C4E700847200 /* CS50 IOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,6 +334,17 @@
 						CreatedOnToolsVersion = 26.1.1;
 						TestTargetID = 713FD76E2ED0177200EC8EA8;
 					};
+					9A6DA8EF2ED6C4E700847200 = {
+						CreatedOnToolsVersion = 26.1;
+					};
+					9A6DA8FF2ED6C4E700847200 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = 9A6DA8EF2ED6C4E700847200;
+					};
+					9A6DA9092ED6C4E700847200 = {
+						CreatedOnToolsVersion = 26.1;
+						TestTargetID = 9A6DA8EF2ED6C4E700847200;
+					};
 				};
 			};
 			buildConfigurationList = 713FD76A2ED0177200EC8EA8 /* Build configuration list for PBXProject "CS50" */;
@@ -216,6 +364,9 @@
 				713FD76E2ED0177200EC8EA8 /* CS50 */,
 				713FD77D2ED0177400EC8EA8 /* CS50Tests */,
 				713FD7872ED0177400EC8EA8 /* CS50UITests */,
+				9A6DA8EF2ED6C4E700847200 /* CS50 IOS */,
+				9A6DA8FF2ED6C4E700847200 /* CS50 IOSTests */,
+				9A6DA9092ED6C4E700847200 /* CS50 IOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,6 +387,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		713FD7862ED0177400EC8EA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA8EE2ED6C4E700847200 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA8FE2ED6C4E700847200 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA9082ED6C4E700847200 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -266,6 +438,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9A6DA8EC2ED6C4E700847200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA8FC2ED6C4E700847200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A6DA9062ED6C4E700847200 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -278,6 +471,16 @@
 			isa = PBXTargetDependency;
 			target = 713FD76E2ED0177200EC8EA8 /* CS50 */;
 			targetProxy = 713FD7892ED0177400EC8EA8 /* PBXContainerItemProxy */;
+		};
+		9A6DA9022ED6C4E700847200 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
+			targetProxy = 9A6DA9012ED6C4E700847200 /* PBXContainerItemProxy */;
+		};
+		9A6DA90C2ED6C4E700847200 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
+			targetProxy = 9A6DA90B2ED6C4E700847200 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -403,11 +606,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CS50/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Location needed to show nearby alerts\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -446,11 +651,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CS50/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"Location needed to show nearby alerts\"";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -488,6 +695,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
@@ -513,6 +721,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
@@ -580,6 +789,167 @@
 			};
 			name = Release;
 		};
+		9A6DA9142ED6C4E800847200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "CS50 IOS/CS50_IOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "CS50 IOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9A6DA9152ED6C4E800847200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "CS50 IOS/CS50_IOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6733NVH559;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "CS50 IOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9A6DA9172ED6C4E800847200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CS50 IOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CS50 IOS";
+			};
+			name = Debug;
+		};
+		9A6DA9182ED6C4E800847200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CS50 IOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CS50 IOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9A6DA91A2ED6C4E800847200 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "CS50 IOS";
+			};
+			name = Debug;
+		};
+		9A6DA91B2ED6C4E800847200 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "CS50 IOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -615,6 +985,33 @@
 			buildConfigurations = (
 				713FD7992ED0177400EC8EA8 /* Debug */,
 				713FD79A2ED0177400EC8EA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A6DA9132ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A6DA9142ED6C4E800847200 /* Debug */,
+				9A6DA9152ED6C4E800847200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A6DA9162ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A6DA9172ED6C4E800847200 /* Debug */,
+				9A6DA9182ED6C4E800847200 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A6DA9192ED6C4E800847200 /* Build configuration list for PBXNativeTarget "CS50 IOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A6DA91A2ED6C4E800847200 /* Debug */,
+				9A6DA91B2ED6C4E800847200 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

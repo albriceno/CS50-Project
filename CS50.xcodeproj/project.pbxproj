@@ -47,31 +47,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		713FD8012ED6367000EC8EA8 /* Exceptions for "CS50" folder in "CS50" target */ = {
+		7167B7522ED81C4A00DED06E /* Exceptions for "CS50 IOS" folder in "CS50" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				.gitignore.txt,
+				CS50App.swift,
+				LocationManager.swift,
+				resourcespage.swift,
 			);
 			target = 713FD76E2ED0177200EC8EA8 /* CS50 */;
 		};
 		9A6DA9122ED6C4E800847200 /* Exceptions for "CS50 IOS" folder in "CS50 IOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				.gitignore.txt,
+				CS50App.swift,
 				Info.plist,
+				LocationManager.swift,
+				resourcespage.swift,
 			);
 			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		713FD7712ED0177200EC8EA8 /* CS50 */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				713FD8012ED6367000EC8EA8 /* Exceptions for "CS50" folder in "CS50" target */,
-			);
-			path = CS50;
-			sourceTree = "<group>";
-		};
 		713FD7812ED0177400EC8EA8 /* CS50Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CS50Tests;
@@ -85,6 +84,7 @@
 		9A6DA8F12ED6C4E700847200 /* CS50 IOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				7167B7522ED81C4A00DED06E /* Exceptions for "CS50 IOS" folder in "CS50" target */,
 				9A6DA9122ED6C4E800847200 /* Exceptions for "CS50 IOS" folder in "CS50 IOS" target */,
 			);
 			path = "CS50 IOS";
@@ -151,7 +151,6 @@
 		713FD7662ED0177200EC8EA8 = {
 			isa = PBXGroup;
 			children = (
-				713FD7712ED0177200EC8EA8 /* CS50 */,
 				713FD7812ED0177400EC8EA8 /* CS50Tests */,
 				713FD78B2ED0177400EC8EA8 /* CS50UITests */,
 				9A6DA8F12ED6C4E700847200 /* CS50 IOS */,
@@ -188,9 +187,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				713FD7712ED0177200EC8EA8 /* CS50 */,
 			);
 			name = CS50;
 			packageProductDependencies = (
@@ -604,9 +600,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6733NVH559;
+				DEVELOPMENT_TEAM = J7KTJNFL6L;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
@@ -628,8 +625,9 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cs50.CS50;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.cs50.caminoclaro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -649,9 +647,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6733NVH559;
+				DEVELOPMENT_TEAM = J7KTJNFL6L;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
@@ -673,8 +672,9 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cs50.CS50;
+				PRODUCT_BUNDLE_IDENTIFIER = .com.cs50.caminoclaro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -795,9 +795,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "CS50 IOS/CS50_IOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6733NVH559;
+				DEVELOPMENT_TEAM = J7KTJNFL6L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CS50 IOS/Info.plist";
@@ -814,6 +815,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -831,9 +833,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "CS50 IOS/CS50_IOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6733NVH559;
+				DEVELOPMENT_TEAM = J7KTJNFL6L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "CS50 IOS/Info.plist";
@@ -850,6 +853,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Camino-Claro.CS50-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

@@ -1,44 +1,92 @@
 //
 //  ContentView.swift
-//  CS50 IOS
+//  CS50
 //
-//  Created by Olivia Jimenez on 11/25/25.
+//  Created by Alejandra Briceno on 11/20/25.
 //
 
 import SwiftUI
 import SwiftData
+import MapKit
+import CoreLocation
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-
+   
+    @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+)
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
+        TabView{
+            NavigationSplitView {
+                List {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        } label: {
+                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
+                
+                List {
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        ResourcesView()
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Label("Resources", systemImage: "book")
+                            .font(.headline)
+                    }
+                    
+                    NavigationLink {
+                        Map(position: $camera)
+                            .mapControls {
+                                    MapUserLocationButton()
+                                    MapCompass()
+                                }
+                    } label: {
+                        Label("Map", systemImage: "map")
+                            .font(.headline)
+                    }
+                    
+                }
+               
+    #if os(macOS)
+                .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+    #endif
+                .toolbar {
+    #if os(iOS)
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+    #endif
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
+            } detail: {
+                Text("Select an item")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            .tabItem {
+                Label("First page", systemImage: "list.bullet")
             }
-        } detail: {
-            Text("Select an item")
+            
+            
+            
+            
+                
+                        
         }
+        
     }
-
+    
+        
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
@@ -59,3 +107,4 @@ struct ContentView: View {
     ContentView()
         .modelContainer(for: Item.self, inMemory: true)
 }
+

@@ -33,6 +33,28 @@ struct ContentView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }
+                
+                List {
+                    NavigationLink {
+                        ResourcesView()
+                    } label: {
+                        Label("Resources", systemImage: "book")
+                            .font(.headline)
+                    }
+                    
+                    NavigationLink {
+                        Map(position: $camera)
+                            .mapControls {
+                                    MapUserLocationButton()
+                                    MapCompass()
+                                }
+                    } label: {
+                        Label("Map", systemImage: "map")
+                            .font(.headline)
+                    }
+                    
+                }
+               
     #if os(macOS)
                 .navigationSplitViewColumnWidth(min: 180, ideal: 200)
     #endif
@@ -52,19 +74,14 @@ struct ContentView: View {
                 Text("Select an item")
             }
             .tabItem {
-                Label("First page", systemImage: "lit.bullet")
+                Label("First page", systemImage: "list.bullet")
             }
             
-            Map(position: $camera)
-                .mapControls {
-                        MapUserLocationButton()
-                        MapCompass()
-                    }
-                
-                .tabItem{
-                    Label("Map", systemImage: "map")
-                }
             
+            
+            
+                
+                        
         }
         
     }

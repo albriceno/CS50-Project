@@ -10,7 +10,7 @@ class CloudKitManager {
     static let shared = CloudKitManager()
     private let database = CKContainer.default().publicCloudDatabase
 
-    // Save a report (text only for now)
+    // Save report (text only for now)
     func saveReport(_ text: String, completion: @escaping (Result<CKRecord, Error>) -> Void) {
         let record = CKRecord(recordType: "Report")
         record["text"] = text as CKRecordValue
@@ -26,7 +26,7 @@ class CloudKitManager {
         }
     }
 
-    // Modern fetch API (iOS 15+)
+    // CLOUDKIT - Modern fetch API (iOS 15+)
     func fetchReports(completion: @escaping (Result<[CKRecord], Error>) -> Void) {
         var results: [CKRecord] = []
 

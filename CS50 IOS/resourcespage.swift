@@ -65,4 +65,3 @@ struct ResourcesView: View {
         ResourcesView()
     }
 }
-

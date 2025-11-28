@@ -1,33 +1,25 @@
 //
-//  MapKitContentView.swift
+//  MainListView.swift
 //  CS50
 //
-//  Created by Olivia Jimenez on 11/26/25.
+//  Created by Olivia Jimenez on 11/28/25.
 //
-
 
 import SwiftUI
 import SwiftData
-import MapKit
-import CoreLocation
 
-struct MapKitContentView: View {
+struct MainListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-   
-    @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    ))
 
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("Item at \(item.timestamp, format: .dateTime)")
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(item.timestamp, format: .dateTime)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -45,12 +37,6 @@ struct MapKitContentView: View {
         } detail: {
             Text("Select an item")
         }
-
-        Map(position: $camera)
-            .mapControls {
-                MapUserLocationButton()
-                MapCompass()
-            }
     }
 
     private func addItem() {
@@ -62,9 +48,7 @@ struct MapKitContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+            offsets.forEach { modelContext.delete(items[$0]) }
         }
     }
 }

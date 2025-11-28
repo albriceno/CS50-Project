@@ -15,6 +15,8 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
+            
+            // --- Main list tab (unchanged) ---
             NavigationSplitView {
                 List {
                     ForEach(items) { item in
@@ -43,6 +45,13 @@ struct ContentView: View {
                 Label("Main", systemImage: "list.bullet")
             }
 
+            // --- NEW MAP TAB ---
+            MapKitContentView()
+                .tabItem {
+                    Label("Map", systemImage: "map")
+                }
+
+            // --- CloudKit tab (unchanged) ---
             CloudKitHomeView()
                 .tabItem {
                     Label("CloudKit", systemImage: "cloud")

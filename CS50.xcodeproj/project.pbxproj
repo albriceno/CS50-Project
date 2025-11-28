@@ -51,8 +51,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				.gitignore.txt,
-				CS50App.swift,
-				LocationManager.swift,
+				Managers/LocationManager.swift,
 				resourcespage.swift,
 			);
 			target = 713FD76E2ED0177200EC8EA8 /* CS50 */;
@@ -61,9 +60,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				.gitignore.txt,
-				CS50App.swift,
 				Info.plist,
-				LocationManager.swift,
+				Managers/LocationManager.swift,
 				resourcespage.swift,
 			);
 			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
@@ -71,16 +69,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		713FD7812ED0177400EC8EA8 /* CS50Tests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CS50Tests;
-			sourceTree = "<group>";
-		};
-		713FD78B2ED0177400EC8EA8 /* CS50UITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CS50UITests;
-			sourceTree = "<group>";
-		};
 		9A6DA8F12ED6C4E700847200 /* CS50 IOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -151,8 +139,6 @@
 		713FD7662ED0177200EC8EA8 = {
 			isa = PBXGroup;
 			children = (
-				713FD7812ED0177400EC8EA8 /* CS50Tests */,
-				713FD78B2ED0177400EC8EA8 /* CS50UITests */,
 				9A6DA8F12ED6C4E700847200 /* CS50 IOS */,
 				9A6DA9032ED6C4E700847200 /* CS50 IOSTests */,
 				9A6DA90D2ED6C4E700847200 /* CS50 IOSUITests */,
@@ -208,9 +194,6 @@
 			dependencies = (
 				713FD7802ED0177400EC8EA8 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				713FD7812ED0177400EC8EA8 /* CS50Tests */,
-			);
 			name = CS50Tests;
 			packageProductDependencies = (
 			);
@@ -230,9 +213,6 @@
 			);
 			dependencies = (
 				713FD78A2ED0177400EC8EA8 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				713FD78B2ED0177400EC8EA8 /* CS50UITests */,
 			);
 			name = CS50UITests;
 			packageProductDependencies = (

@@ -51,7 +51,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				.gitignore.txt,
-				CS50App.swift,
 				LocationManager.swift,
 				resourcespage.swift,
 			);
@@ -61,7 +60,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				.gitignore.txt,
-				CS50App.swift,
 				Info.plist,
 				LocationManager.swift,
 				resourcespage.swift,

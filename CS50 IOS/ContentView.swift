@@ -1,10 +1,9 @@
 //
 //  ContentView.swift
-//  CS50
+//  CS50 IOS
 //
-//  Created by Alejandra Briceno on 11/20/25.
+//  Created by Olivia Jimenez on 11/25/25.
 //
-
 import SwiftUI
 import SwiftData
 import MapKit
@@ -13,15 +12,9 @@ import CoreLocation
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-   
-    @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
-)
-    
+
     var body: some View {
-        TabView{
+        TabView {
             NavigationSplitView {
                 List {
                     ForEach(items) { item in
@@ -33,37 +26,10 @@ struct ContentView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }
-                
-                List {
-                    NavigationLink {
-                        ResourcesView()
-                    } label: {
-                        Label("Resources", systemImage: "book")
-                            .font(.headline)
-                    }
-                    
-                    NavigationLink {
-                        Map(position: $camera)
-                            .mapControls {
-                                    MapUserLocationButton()
-                                    MapCompass()
-                                }
-                    } label: {
-                        Label("Map", systemImage: "map")
-                            .font(.headline)
-                    }
-                    
-                }
-               
-    #if os(macOS)
-                .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-    #endif
                 .toolbar {
-    #if os(iOS)
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
-    #endif
                     ToolbarItem {
                         Button(action: addItem) {
                             Label("Add Item", systemImage: "plus")
@@ -74,19 +40,16 @@ struct ContentView: View {
                 Text("Select an item")
             }
             .tabItem {
-                Label("First page", systemImage: "list.bullet")
+                Label("Main", systemImage: "list.bullet")
             }
-            
-            
-            
-            
-                
-                        
+
+            CloudKitHomeView()
+                .tabItem {
+                    Label("CloudKit", systemImage: "cloud")
+                }
         }
-        
     }
-    
-        
+
     private func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
@@ -107,4 +70,3 @@ struct ContentView: View {
     ContentView()
         .modelContainer(for: Item.self, inMemory: true)
 }
-

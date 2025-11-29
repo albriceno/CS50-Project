@@ -40,7 +40,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				.gitignore.txt,
-				Info.plist,
 				LocationManager.swift,
 				resourcespage.swift,
 			);

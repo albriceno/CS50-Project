@@ -7,26 +7,32 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseCore
+import FirebaseAuth
 
 @main
 struct CS50_IOSApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+    init() {
+        // Initialize Firebase
+        FirebaseApp.configure()
+        signInAnonymouslyIfNeeded()
+    }
+    private func signInAnonymouslyIfNeeded() {
+        // Sign in if not already authenticated
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously { result, error in
+                if let error = error {
+                    print("Firebase anonymous auth failed: \(error.localizedDescription)")
+                } else {
+                    print("Signed in anonymously with UID: \(result?.user.uid ?? "no-uid")")
+                }
+            }
         }
-    }()
-
+    }
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
     }
 }

@@ -1,81 +1,78 @@
-//
-//  ContentView.swift
-//  CS50 IOS
-//
-//  Created by Olivia Jimenez on 11/25/25.
-//
+////
+///
 import SwiftUI
-import SwiftData
-import MapKit
-import CoreLocation
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+
+    @State private var isSaving = false
+    @State private var saveResultMessage: String?
 
     var body: some View {
         TabView {
-            
-            // --- Main list tab (unchanged) ---
-            NavigationSplitView {
-                List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                        } label: {
-                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                        }
-                    }
-                    .onDelete(perform: deleteItems)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
-            } detail: {
-                Text("Select an item")
-            }
-            .tabItem {
-                Label("Main", systemImage: "list.bullet")
-            }
-
-            // --- NEW MAP TAB ---
+            // 🗺️ MAP TAB – uses your partner's view
             MapKitContentView()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
 
-            // --- CloudKit tab (unchanged) ---
-            CloudKitHomeView()
-                .tabItem {
-                    Label("CloudKit", systemImage: "cloud")
+            // 🧪 DEBUG / BACKEND TEST TAB
+            VStack(spacing: 20) {
+                Text("ICE Activity Tracker - Backend Test")
+                    .font(.headline)
+
+                Button {
+                    testCreateDummyReport()
+                } label: {
+                    Text(isSaving ? "Saving..." : "Create Dummy Report")
                 }
+                .disabled(isSaving)
+
+                if let message = saveResultMessage {
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+
+                Spacer()
+            }
+            .padding()
+            .tabItem {
+                Label("Debug", systemImage: "hammer")
+            }
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+    private func testCreateDummyReport() {
+        isSaving = true
+        saveResultMessage = nil
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        // Example coordinates: somewhere in the US
+        let testLat = 40.7128
+        let testLng = -74.0060
+
+        ReportService.shared.submitReport(
+            lat: testLat,
+            lng: testLng,
+            description: "Test ICE report from ContentView",
+            imageData: nil
+        ) { result in
+            DispatchQueue.main.async {
+                self.isSaving = false
+                switch result {
+                case .success:
+                    self.saveResultMessage = "✅ Report saved! Check Firestore 'reports' collection."
+                case .failure(let error):
+                    self.saveResultMessage = "❌ Failed to save report: \(error.localizedDescription)"
+                }
             }
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

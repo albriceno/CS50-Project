@@ -14,7 +14,6 @@ import FirebaseAuth
 struct CS50_IOSApp: App {
 
     init() {
-        // Initialize Firebase
         FirebaseApp.configure()
         signInAnonymouslyIfNeeded()
     }

@@ -21,18 +21,13 @@ struct MapKitContentView: View {
     ))
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                
-            }
-            
-        }
-
         Map(position: $camera)
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()
             }
+        
+            
     }
 
     private func addItem() {

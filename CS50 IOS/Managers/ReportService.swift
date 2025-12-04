@@ -33,7 +33,6 @@ final class ReportService {
         lat: Double,
         lng: Double,
         description: String,
-        imageData: Data?,
         completion: @escaping (Result<Void, Error>) -> Void
     ) {
         print("📨 submitReport called (Firestore version)")
@@ -49,7 +48,7 @@ final class ReportService {
 
         reportsCollection.addDocument(data: data) { error in
             print("📥 addDocument completion called")
-
+            
             if let error = error {
                 print("🔥 Firestore addDocument error: \(error)")
                 completion(.failure(error))
@@ -57,6 +56,94 @@ final class ReportService {
                 print("✅ Firestore document added successfully")
                 completion(.success(()))
             }
+            
         }
+   
+    }
+    func fetchActiveReportsOnce(completion: @escaping (Result<[Report], Error>) -> Void) {
+        print("📡 fetchActiveReportsOnce called")
+
+        let cutoff = Timestamp(date: Date().addingTimeInterval(-4 * 60 * 60))
+
+        reportsCollection
+            .whereField("createdAt", isGreaterThan: cutoff)
+            .getDocuments { snapshot, error in
+
+                if let error = error {
+                    print("🔥 fetch error: \(error)")
+                    completion(.failure(error))
+                    return
+                }
+
+                guard let documents = snapshot?.documents else {
+                    completion(.success([]))
+                    return
+                }
+
+                let reports = documents.compactMap { doc -> Report? in
+                    let data = doc.data()
+                    guard
+                        let lat = data["lat"] as? Double,
+                        let lng = data["lng"] as? Double,
+                        let description = data["description"] as? String,
+                        let createdAt = data["createdAt"] as? Timestamp
+                    else { return nil }
+
+                    return Report(
+                        id: doc.documentID,
+                        lat: lat,
+                        lng: lng,
+                        description: description,
+                        createdAt: createdAt.dateValue()
+                    )
+                }
+
+                print("📥 fetched \(reports.count) reports")
+                completion(.success(reports))
+            }
+    }
+    func listenToActiveReports(
+        onChange: @escaping ([Report]) -> Void,
+        onError: @escaping (Error) -> Void
+    ) -> ListenerRegistration {
+
+        print(" Setting up Firestore listener")
+
+        let cutoff = Timestamp(date: Date().addingTimeInterval(-4 * 60 * 60))
+
+        return reportsCollection
+            .whereField("createdAt", isGreaterThan: cutoff)
+            .addSnapshotListener { snapshot, error in
+
+                if let error = error {
+                    print("listener error: \(error)")
+                    onError(error)
+                    return
+                }
+
+                guard let documents = snapshot?.documents else {
+                    onChange([])
+                    return
+                }
+
+                let reports = documents.compactMap { doc -> Report? in
+                    let data = doc.data()
+                    guard
+                        let lat = data["lat"] as? Double,
+                        let lng = data["lng"] as? Double,
+                        let description = data["description"] as? String,
+                        let createdAt = data["createdAt"] as? Timestamp
+                    else { return nil }
+
+                    return Report(
+                        id: doc.documentID,
+                        lat: lat,
+                        lng: lng,
+                        description: description,
+                        createdAt: createdAt.dateValue()
+                    )
+                }
+                onChange(reports)
+            }
     }
 }

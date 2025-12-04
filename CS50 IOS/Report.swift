@@ -14,6 +14,5 @@ struct Report: Identifiable {
     let lat: Double
     let lng: Double
     let description: String
-    let imageURL: String
     let createdAt: Date
 }

@@ -16,7 +16,7 @@ struct MapKitContentView: View {
     @Query private var items: [Item]
    
     @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: 71.1182),
+        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     ))
 

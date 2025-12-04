@@ -17,8 +17,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     
     @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: 71.1182),
-        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
+        span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
     
     override init() {
         super.init()
@@ -27,6 +27,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        
+        let annotation = MKPointAnnotation()
+        annotation.title = "ICE spotted"
+        annotation.subtitle = "View detailed report"
+        annot
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

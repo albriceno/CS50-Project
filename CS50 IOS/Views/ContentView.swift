@@ -41,6 +41,23 @@ struct ContentView: View {
             .tabItem {
                 Label("Debug", systemImage: "hammer")
             }
+
+            // 📚 RESOURCES TAB
+            NavigationSplitView {
+                List {
+                    NavigationLink {
+                        ResourcesView()
+                    } label: {
+                        Label("Resources", systemImage: "book")
+                            .font(.headline)
+                    }
+                }
+            } detail: {
+                Text("Select a resource")
+            }
+            .tabItem {
+                Label("Resources", systemImage: "book")
+            }
         }
     }
 
@@ -55,15 +72,15 @@ struct ContentView: View {
         ReportService.shared.submitReport(
             lat: testLat,
             lng: testLng,
-            description: "Test ICE report from ContentView",
+            description: "Test ICE report from ContentView"
         ) { result in
             DispatchQueue.main.async {
                 self.isSaving = false
                 switch result {
                 case .success:
-                    self.saveResultMessage = "✅ Report saved! Check Firestore 'reports' collection."
+                    self.saveResultMessage = "Report saved! Check Firestore 'reports' collection."
                 case .failure(let error):
-                    self.saveResultMessage = "❌ Failed to save report: \(error.localizedDescription)"
+                    self.saveResultMessage = "Failed to save report: \(error.localizedDescription)"
                 }
             }
         }

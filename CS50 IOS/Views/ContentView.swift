@@ -56,7 +56,6 @@ struct ContentView: View {
             lat: testLat,
             lng: testLng,
             description: "Test ICE report from ContentView",
-            imageData: nil
         ) { result in
             DispatchQueue.main.async {
                 self.isSaving = false

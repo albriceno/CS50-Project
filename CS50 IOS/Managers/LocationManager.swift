@@ -17,7 +17,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     
     @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: 71.1182),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
     
     override init() {

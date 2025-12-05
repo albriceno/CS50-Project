@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
+
 extension UserDefaults {
     static let resourcesPreviewSuite: UserDefaults = {
         let suiteName = "ResourcesViewPreviewSuite"
         return UserDefaults(suiteName: suiteName) ?? .standard
     }()
 }
+
 struct ResourcesView: View {
     @AppStorage("resourcesLanguage", store: UserDefaults.resourcesPreviewSuite) private var resourcesLanguageCode: String = "en"
     
@@ -66,4 +68,6 @@ struct ResourcesView: View {
                 }
             }
         }
-        .navigationTitle(language == .english ? "Resources To Support You" : "Recursos para Apoyarte"
+        .navigationTitle(language == .english ? "Resources To Support You" : "Recursos para Apoyarte")
+    }
+}

@@ -41,7 +41,6 @@
 			membershipExceptions = (
 				.gitignore.txt,
 				Info.plist,
-				resourcespage.swift,
 			);
 			target = 9A6DA8EF2ED6C4E700847200 /* CS50 IOS */;
 		};

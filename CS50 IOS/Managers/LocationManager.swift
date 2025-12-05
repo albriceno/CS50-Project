@@ -28,10 +28,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        let annotation = MKPointAnnotation()
-        annotation.title = "ICE spotted"
-        annotation.subtitle = "View detailed report"
-        annot
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

@@ -21,9 +21,9 @@ struct ContentView: View {
                     .font(.headline)
 
                 Button {
-                    testCreateDummyReport()
+                    CreateReport()
                 } label: {
-                    Text(isSaving ? "Saving..." : "Create Dummy Report")
+                    Text(isSaving ? "Saving..." : "Create Report")
                 }
                 .disabled(isSaving)
 
@@ -39,7 +39,7 @@ struct ContentView: View {
             }
             .padding()
             .tabItem {
-                Label("Debug", systemImage: "hammer")
+                Label("Create Report", systemImage: "hammer")
             }
 
             // 📚 RESOURCES TAB
@@ -61,27 +61,34 @@ struct ContentView: View {
         }
     }
 
-    private func testCreateDummyReport() {
-        isSaving = true
-        saveResultMessage = nil
-
-        // Example coordinates: somewhere in the US
-        let testLat = 40.7128
-        let testLng = -74.0060
-
-        ReportService.shared.submitReport(
-            lat: testLat,
-            lng: testLng,
-            description: "Test ICE report from ContentView"
-        ) { result in
-            DispatchQueue.main.async {
-                self.isSaving = false
-                switch result {
-                case .success:
-                    self.saveResultMessage = "Report saved! Check Firestore 'reports' collection."
-                case .failure(let error):
-                    self.saveResultMessage = "Failed to save report: \(error.localizedDescription)"
+    struct FormView: View {
+        @State private var Title: String = ""
+        @State private var IncidentDescription: String = ""
+        @State private var date = Date()
+        
+        var body: some View {
+            NavigationStack {
+                Form {
+                    Section("ICE Activity Report") {
+                        TextField("Report Title", text: $Title)
+                        ZStack(alignment: .topLeading) {
+                            if IncidentDescription.isEmpty {
+                                Text("Describe incident with as much detail as possible.")
+                                    .foregroundColor(.gray)
+                                    .padding(.horizontal, 4)
+                                    .padding(.vertical, 8)
+                            }
+                            TextEditor(text: $IncidentDescription)
+                                .frame(minHeight: 120)
+                        }
+                        DatePicker(
+                            "Date",
+                            selection: $date,
+                            displayedComponents: [.date]
+                        )
+                    }
                 }
+                .navigationTitle("New Report")
             }
         }
     }

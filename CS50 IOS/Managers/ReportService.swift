@@ -35,7 +35,7 @@ final class ReportService {
         description: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) {
-        print("📨 submitReport called (Firestore version)")
+        print("submitReport called (Firestore version)")
 
         let data: [String: Any] = [
             "lat": lat,

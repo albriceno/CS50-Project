@@ -57,17 +57,7 @@ struct MapKitContentView: View {
                 MapUserLocationButton()
                 MapCompass()
             }
-            .gesture(
-                TapGesture().onEnded { location in
-                    if let coordinate = proxy.convert(location, from: .local) {
-                        let newPin = MapPin(coordinate: coordinate, title: "Ice spotted", subtitle: "")
-                        
-                        viewModel.pins.append(newPin)
-                        selectedPin = newPin
-                        showingEditor = true
-                    }
-                }
-            )
+            
         }
         
         .sheet(item:$selectedPin) { pin in

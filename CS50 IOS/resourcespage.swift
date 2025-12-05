@@ -35,6 +35,8 @@ struct ResourcesView: View {
                         Text(language == .english
                              ? "Under the 4th and 5th Amendments of the US Constitution you have the right to remain silent, to refuse to sign documents without first speaking to a lawyer, and to deny permission for an office to enter your home"
                              : "NO ABRA LA PUERTA si un agente de inmigración está tocando.NO CONTESTE NINGUNA PREGUNTA de un agente de inmigración si trata de hablar con usted. Usted tiene el derecho a guardar silencio.NO FIRME NADA sin antes hablar con un abogado. Usted tiene el derecho de hablar con un abogado. Si usted está fuera de su casa, pregúntele al agente si tiene la libertad de irse y si le dice que sí, váyase con tranquilidad.")
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
                         .padding()
                     }
                 }

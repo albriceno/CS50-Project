@@ -40,6 +40,10 @@ struct ResourcesView: View {
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)
                         .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(12)
+                        .shadow(radius: 4)
+                        .padding(.horizontal)
                     }
                 }
             }
@@ -48,18 +52,42 @@ struct ResourcesView: View {
                 NavigationLink("Massachusetts Immigrant & Refugee Advocacy Coalition (MIRA) ") {
                     Text(language == .english ? "Phone Number: 617-350-5480" : "Número de teléfono: 617-350-5480")
                         .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.horizontal)
                 }
                 NavigationLink("Commission on Immigrant Rights & Citizenship (CIRC)") {
                     Text(language == .english ? "Phone Number: 617-349-4396" : "Número de teléfono: 617-349-4396")
                         .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.horizontal)
                 }
                 NavigationLink(language == .english ? "Inquilinos Boricuas en Acción" : "Inquilinos Boricuas en Acción") {
                     Text(language == .english ? "Phone Number: 617 927-1707" : "Número de teléfono: 617 927-1707")
                         .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.horizontal)
                 }
                 NavigationLink(language == .english ? "Center to Support Immigrant Organizing" : "Centro de Apoyo a la Organización de Inmigrantes") {
                     Text(language == .english ? "Phone Number: 617 742-5165" : "Número de teléfono: 617 742-5165")
                         .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.horizontal)
                 }
             }
             
@@ -67,6 +95,12 @@ struct ResourcesView: View {
                 NavigationLink(language == .english ? "Greater Boston Legal Services - Immigration Unit" : "Greater Boston Legal Services - Unidad de Inmigración") {
                     Text(language == .english ? "Phone Number: 617 371-1234" : "Número de teléfono: 617 371-1234")
                         .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.horizontal)
                 }
             }
         }

@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
-class ReportsViewModel: ObservableObject {
+class LegacyReportsViewModel: ObservableObject {
     @Published var reports: [Report] = []
     private var listener: ListenerRegistration?
 

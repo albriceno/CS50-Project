@@ -5,8 +5,6 @@
 //  Created by Olivia Jimenez on 11/29/25.
 //
 
-// TEST TEST HARDCODED REPORT NEEDS TO BE UPDATED
-
 import Foundation
 import FirebaseFirestore
 
@@ -19,7 +17,7 @@ final class ReportService {
     private let db: Firestore
 
     private init() {
-        print("✅ ReportService init, configuring Firestore")
+        print("ReportService init, configuring Firestore")
         self.db = Firestore.firestore()
     }
 
@@ -28,7 +26,6 @@ final class ReportService {
         db.collection("reports")
     }
 
-    /// Submit a new report (Firestore only, no image upload yet)
     func submitReport(
         lat: Double,
         lng: Double,
@@ -44,16 +41,16 @@ final class ReportService {
             "createdAt": Timestamp(date: Date())
         ]
 
-        print("📝 About to call addDocument with data: \(data)")
+        print("About to call addDocument with data: \(data)")
 
         reportsCollection.addDocument(data: data) { error in
-            print("📥 addDocument completion called")
+            print("addDocument completion called")
             
             if let error = error {
-                print("🔥 Firestore addDocument error: \(error)")
+                print("Firestore addDocument error: \(error)")
                 completion(.failure(error))
             } else {
-                print("✅ Firestore document added successfully")
+                print("Firestore document added successfully")
                 completion(.success(()))
             }
             
@@ -61,7 +58,7 @@ final class ReportService {
    
     }
     func fetchActiveReportsOnce(completion: @escaping (Result<[Report], Error>) -> Void) {
-        print("📡 fetchActiveReportsOnce called")
+        print("fetchActiveReportsOnce called")
 
         let cutoff = Timestamp(date: Date().addingTimeInterval(-4 * 60 * 60))
 
@@ -70,7 +67,7 @@ final class ReportService {
             .getDocuments { snapshot, error in
 
                 if let error = error {
-                    print("🔥 fetch error: \(error)")
+                    print("fetch error: \(error)")
                     completion(.failure(error))
                     return
                 }
@@ -98,7 +95,7 @@ final class ReportService {
                     )
                 }
 
-                print("📥 fetched \(reports.count) reports")
+                print("fetched \(reports.count) reports")
                 completion(.success(reports))
             }
     }

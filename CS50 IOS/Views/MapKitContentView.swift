@@ -21,6 +21,16 @@ struct MapPin: Identifiable{
 
 class MapViewModel: ObservableObject {
     @Published var pins: [MapPin] = []
+    
+    func addPin(at coordinate: CLLocationCoordinate2D)
+    {
+        let newPin = MapPin(
+            coordinate: coordinate,
+            title: "ICE Spotted",
+            subtitle: "Detailed Report Below:"
+        )
+        pins.append(newPin)
+    }
 }
 
 struct MapKitContentView: View {
@@ -38,58 +48,65 @@ struct MapKitContentView: View {
     var body: some View {
         MapReader { proxy in
             Map(position: $camera) {
-                
                 ForEach(viewModel.pins) { pin in
                     Annotation(pin.title, coordinate: pin.coordinate) {
-                        VStack {
+                        VStack(spacing: 4) {
                             Image(systemName: "mappin.circle.fill")
                                 .font(.title)
                                 .foregroundStyle(.red)
-                                .onTapGesture {
-                                    selectedPin = pin
-                                    showingEditor = true
-                                }
+                            
+                        }
+                        .onTapGesture {
+                            selectedPin = pin
                         }
                     }
                 }
+                
             }
+            
+            .gesture(
+                TapGesture()
+                    .onEnded { _ in }
+            )
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded{ gesture in
+                              let tapPoint = gesture.location
+                              if let coordinate = proxy.convert(tapPoint, from: .local)
+                              {
+                                  viewModel.addPin(at: coordinate)
+                              }
+                    }
+            
+            )
+            .sheet(item: $selectedPin) { pin in
+                VStack (spacing: 12) {
+                    Text(pin.title).font(.title)
+                    Text(pin.subtitle)
+                }
+                .padding()
+            }
+        
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()
             }
-            .gesture(
-                TapGesture().onEnded { location in
-                    if let coordinate = proxy.convert(location, from: .local) {
-                        let newPin = MapPin(coordinate: coordinate, title: "Ice spotted", subtitle: "")
-                        
-                        viewModel.pins.append(newPin)
-                        selectedPin = newPin
-                        showingEditor = true
-                    }
-                }
-            )
+            
         }
         
-        .sheet(item:$selectedPin) { pin in
-            PinEditorView(pin: pin) { updatedPin in
-                if let index = viewModel.pins.firstIndex(where: { $0.id == pin.id }) {
-                    viewModel.pins[index] = updatedPin
-                    
-                }
-            }
-        }
+        
     }
 
     
 
-    private func addItem() {
+    func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
                 modelContext.delete(items[index])

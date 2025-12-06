@@ -97,8 +97,6 @@ struct MapKitContentView: View {
         
     }
 
-    
-
     func addItem() {
         withAnimation {
             let newItem = Item(timestamp: Date())

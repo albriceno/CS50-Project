@@ -8,6 +8,7 @@
 // Customize later
 
 import Foundation
+import CoreLocation
 
 struct Report: Identifiable {
     let id: String
@@ -15,4 +16,15 @@ struct Report: Identifiable {
     let lng: Double
     let description: String
     let createdAt: Date
+    
+    var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: createdAt)
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: lat, longitude: lng)
+    }
 }

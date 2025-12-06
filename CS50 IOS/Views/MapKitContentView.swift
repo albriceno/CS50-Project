@@ -16,20 +16,27 @@ struct MapPin: Identifiable{
     let id = UUID()
     var coordinate: CLLocationCoordinate2D
     var title: String
-    var subtitle: String
+    @State var subtitle: String
 }
 
 class MapViewModel: ObservableObject {
     @Published var pins: [MapPin] = []
     
-    func addPin(at coordinate: CLLocationCoordinate2D)
+    func addPin(at coordinate: CLLocationCoordinate2D) -> MapPin
     {
         let newPin = MapPin(
             coordinate: coordinate,
             title: "ICE Spotted",
-            subtitle: "Detailed Report Below:"
+            subtitle: ""
         )
         pins.append(newPin)
+        return newPin
+    }
+    
+    func updatePin(_ updatedPin: MapPin) {
+        if let index = pins.firstIndex(where: { $0.id == updatedPin.id }) {
+            pins[index] = updatedPin
+        }
     }
 }
 
@@ -74,19 +81,21 @@ struct MapKitContentView: View {
                               let tapPoint = gesture.location
                               if let coordinate = proxy.convert(tapPoint, from: .local)
                               {
-                                  viewModel.addPin(at: coordinate)
+                                  let newPin = viewModel.addPin(at: coordinate)
+                                  selectedPin = newPin
                               }
                     }
             
             )
             .sheet(item: $selectedPin) { pin in
-                VStack (spacing: 12) {
-                    Text(pin.title).font(.title)
-                    Text(pin.subtitle)
+                PinEditorView(pin: pin) {
+                    updatedPin in
+                    viewModel.updatePin(updatedPin)
                 }
-                .padding()
             }
-        
+            
+           
+            
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()

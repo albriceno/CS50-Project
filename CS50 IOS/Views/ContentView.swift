@@ -20,12 +20,12 @@ struct ContentView: View {
                 Text("ICE Activity Tracker - Backend Test")
                     .font(.headline)
 
-                Button {
-                    CreateReport()
-                } label: {
-                    Text(isSaving ? "Saving..." : "Create Report")
-                }
-                .disabled(isSaving)
+                //Button {
+                //    CreateReport()
+               // } label: {
+               //     Text(isSaving ? "Saving..." : "Create Report")
+              //  }
+              //  .disabled(isSaving)
 
                 if let message = saveResultMessage {
                     Text(message)

@@ -230,10 +230,7 @@ struct MapKitContentView: View {
             viewModel.loadPinsFromFirestore()
         }
         
-        
-        
-        
-        
+
         
     }
     

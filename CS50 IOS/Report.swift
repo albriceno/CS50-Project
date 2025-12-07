@@ -10,6 +10,7 @@
 import Foundation
 import CoreLocation
 
+
 struct Report: Identifiable {
     let id: String
     let lat: Double

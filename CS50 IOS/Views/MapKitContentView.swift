@@ -139,6 +139,8 @@ struct MapKitContentView: View {
     
     @State private var selectedPin: MapPin?
     @State private var showingEditor = false
+    @State private var currentCenter = CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182)
+    @State private var currentDistance: CLLocationDistance = 1000
     
     var body: some View {
         MapReader { proxy in
@@ -153,24 +155,30 @@ struct MapKitContentView: View {
                             }
                             .contentShape(Rectangle())
                             .padding(30)
-                            .highPriorityGesture(
-                                TapGesture().onEnded {
+                            .onTapGesture {
                                 selectedPin = pin
                             }
-                                )
+                            
                         }
                     }
                     
-                  
+                    
                 }
                 
-                .simultaneousGesture(
-                    TapGesture()
-                        .onEnded { location in
-                            addPinAtTap()
+                .onMapCameraChange { context in
+                    currentCenter = context.region.center
+                    currentDistance = context.camera.distance
+                }
+               
+                
+                .highPriorityGesture(
+                        SpatialTapGesture(count: 2)
+                        .onEnded{value in
+                            let loc = value.location
+                            handleMapTap(proxy: proxy, tapLocation: loc)
                         }
                 )
-              
+                
                 .sheet(item: $selectedPin) { pin in
                     PinEditorView(pin: pin) { updatedPin in
                         // 1) Update pin locally + save to pins collection
@@ -202,21 +210,23 @@ struct MapKitContentView: View {
                 
                 VStack {
                     HStack {
-                        let ogCoordinate = CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182)
                         Button("Zoom In") {
+                            
+                            currentDistance *= 0.8
                             camera = .camera(
                                 MapCamera(
-                                    centerCoordinate: camera.camera?.centerCoordinate ?? ogCoordinate,
-                                    distance: (camera.camera?.distance ?? 1000) * 0.8
+                                    centerCoordinate: currentCenter,
+                                    distance: currentDistance
                                 )
                             )
                         }
                         Button("Zoom Out") {
-
+                            
+                            currentDistance *= 1.2
                             camera = .camera(
                                 MapCamera(
-                                    centerCoordinate: camera.camera?.centerCoordinate ?? ogCoordinate,
-                                    distance: (camera.camera?.distance ?? 1000) * 1.2
+                                    centerCoordinate: currentCenter,
+                                    distance: currentDistance
                                 )
                             )
                         }
@@ -231,13 +241,25 @@ struct MapKitContentView: View {
         }
         
         
-        
-        
-        
+      
+    }
+    
+    private func handleMapTap(proxy: MapProxy, tapLocation: CGPoint) {
+        guard let coordinate = proxy.convert(tapLocation, from: .local) else {return}
+            let TappedExistingPin = viewModel.pins.contains {
+                pin in
+                guard let pinPoint: CGPoint = proxy.convert(pin.coordinate, to: .local) else { return false }
+                let distance = hypot(pinPoint.x - tapLocation.x, pinPoint.y - tapLocation.y)
+                return distance < 30
+            }
+            
+            if TappedExistingPin {
+                return
+            }
+            
+           _ = viewModel.addPin(at: coordinate)
         
     }
     
-    private func addPinFromTap() {
-        guard let 
-    }
+ 
 }

@@ -129,6 +129,7 @@ class MapViewModel: ObservableObject {
 }
 
 struct MapKitContentView: View {
+    @StateObject private var locationManager = LocationManager()
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     @StateObject private var viewModel = MapViewModel()
@@ -145,7 +146,8 @@ struct MapKitContentView: View {
     var body: some View {
         MapReader { proxy in
             ZStack {
-                Map(position: $camera) {
+                Map(position: $camera)
+                {
                     ForEach(viewModel.pins) { pin in
                         Annotation(pin.title, coordinate: pin.coordinate) {
                             VStack(spacing: 4) {
@@ -154,7 +156,7 @@ struct MapKitContentView: View {
                                     .foregroundStyle(.red)
                             }
                             .contentShape(Rectangle())
-                            .padding(30)
+                            .padding(10)
                             .onTapGesture {
                                 selectedPin = pin
                             }
@@ -168,6 +170,13 @@ struct MapKitContentView: View {
                 .onMapCameraChange { context in
                     currentCenter = context.region.center
                     currentDistance = context.camera.distance
+                }
+                .onReceive(locationManager.$region){
+                    newRegion in
+                    camera = .camera(MapCamera(
+                        centerCoordinate: newRegion.center,
+                        distance: currentDistance
+                    ))
                 }
                
                 

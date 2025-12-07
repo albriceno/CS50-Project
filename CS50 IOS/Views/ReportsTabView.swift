@@ -7,6 +7,43 @@
 
 import SwiftUI
 
+struct ReportDetailView: View {
+    let report: Report
+    
+    private let formatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        df.timeStyle = .short
+        return df
+    }()
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // Headline
+                Text("Possible ICE Activity Reported")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                // Date/time
+                Text("Reported at \(formatter.string(from: report.createdAt))")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Divider()
+                
+                // Full description
+                Text(report.description)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+            }
+            .padding()
+        }
+        .navigationTitle("Report Details")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
 struct ReportsTabView: View {
     @StateObject private var viewModel = LegacyReportsViewModel()
     
@@ -20,17 +57,20 @@ struct ReportsTabView: View {
     var body: some View {
         NavigationStack {
             List(viewModel.reports) { report in
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(report.description)
-                        .font(.headline)
-                    
-                    Text("Lat: \(report.lat), Lng: \(report.lng)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    
-                    Text("Created: \(formatter.string(from: report.createdAt))")
-                        .font(.caption2)
-                        .foregroundColor(.gray)
+                NavigationLink {
+                    ReportDetailView(report: report)
+                } label: {
+                    VStack(alignment: .leading, spacing: 4) {
+                        // Fixed headline for every report
+                        Text("Possible ICE Activity Reported")
+                            .font(.headline)
+                        
+                        // Small metadata under the headline
+                        Text(formatter.string(from: report.createdAt))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 4)
                 }
             }
             .navigationTitle("Reports")

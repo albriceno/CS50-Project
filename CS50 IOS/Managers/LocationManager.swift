@@ -12,8 +12,6 @@ import MapKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    let mapView = MKMapView()
-    
     private let manager = CLLocationManager()
     
     @Published var region = MKCoordinateRegion(
@@ -24,7 +22,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        mapView.showsUserLocation = true
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
@@ -39,12 +36,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             center: coord,
             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         )
-        
-        mapView.setRegion(region, animated: true)
+    
 
-        DispatchQueue.main.async {
-                    self.region.center = location.coordinate
-                }
         
         }
     }

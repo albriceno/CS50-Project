@@ -96,30 +96,26 @@ struct MapKitContentView: View {
                                     .foregroundStyle(.red)
                                 
                             }
-                            .onTapGesture {
+                            .contentShape(Rectangle())
+                            .padding(30)
+                            .highPriorityGesture(
+                                TapGesture().onEnded {
                                 selectedPin = pin
                             }
+                                )
                         }
                     }
                     
+                  
                 }
                 
-                .gesture(
-                    LongPressGesture(minimumDuration: 0.5)
-                        .onEnded { _ in }
-                )
                 .simultaneousGesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                        .onEnded{ gesture in
-                            let tapPoint = gesture.location
-                            if let coordinate = proxy.convert(tapPoint, from: .local)
-                            {
-                                let newPin = viewModel.addPin(at: coordinate)
-                                selectedPin = newPin
-                            }
+                    TapGesture()
+                        .onEnded { location in
+                            addPinAtTap()
                         }
-                    
                 )
+              
                 .sheet(item: $selectedPin) { pin in
                     PinEditorView(pin: pin) {
                         updatedPin in
@@ -141,6 +137,7 @@ struct MapKitContentView: View {
                             )
                         }
                         Button("Zoom Out") {
+
                             camera = .camera(
                                 MapCamera(centerCoordinate: camera.camera?.centerCoordinate ?? ogCoordinate, distance: (camera.camera?.distance ?? 1000) * 1.2)
                             )
@@ -154,5 +151,15 @@ struct MapKitContentView: View {
             
             
         }
+        
+        
+        
+        
+        
+        
+    }
+    
+    private func addPinFromTap() {
+        guard let 
     }
 }

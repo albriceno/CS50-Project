@@ -205,9 +205,9 @@ struct MapKitContentView: View {
                         ) { result in
                             switch result {
                             case .success:
-                                print("✅ Report created from pin.")
+                                print("Report created from pin.")
                             case .failure(let error):
-                                print("🔥 Failed to create report from pin: \(error.localizedDescription)")
+                                print("Failed to create report from pin: \(error.localizedDescription)")
                             }
                         }
                     }
@@ -281,8 +281,11 @@ struct MapKitContentView: View {
                 return
             }
             
-           _ = viewModel.addPin(at: coordinate)
+           let newPin = viewModel.addPin(at: coordinate)
         
+        DispatchQueue.main.async {
+            selectedPin = newPin
+        }
     }
     
  

@@ -28,6 +28,7 @@ final class ReportService {
         lat: Double,
         lng: Double,
         description: String,
+        createdAt: Date,
         completion: @escaping (Result<Void, Error>) -> Void
     ) {
         print("submitReport called (Firestore version)")
@@ -36,7 +37,7 @@ final class ReportService {
             "lat": lat,
             "lng": lng,
             "description": description,
-            "createdAt": Timestamp(date: Date())
+            "createdAt": Timestamp(date: createdAt)
         ]
 
         print("About to call addDocument with data: \(data)")

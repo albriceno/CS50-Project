@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var showManualLocationSheet: Bool = false
     @State private var selectedLat: Double?
     @State private var selectedLng: Double?
+    @State private var reportDate = Date()
     
     // Manual entry strings for the sheet
     @State private var selectedLatString: String = ""
@@ -30,15 +31,15 @@ struct ContentView: View {
                     Label("Map", systemImage: "map")
                 }
             
-            // DEBUG / BACKEND TEST TAB
+            // Create Report tab
             VStack(spacing: 16) {
-                Text("ICE Activity Tracker - Backend Test")
-                    .font(.headline)
+                // 🔹 Fixed headline for every report
+                Text("Possible ICE Activity Reported")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Description")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
                     TextEditor(text: $descriptionText)
                         .frame(minHeight: 100)
                         .overlay(
@@ -47,7 +48,7 @@ struct ContentView: View {
                         )
                         .accessibilityLabel("Report description")
                 }
-                
+
                 Button {
                     handleCreateReportTap()
                 } label: {
@@ -56,7 +57,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(isSaving || descriptionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                
+
                 if let message = saveResultMessage {
                     Text(message)
                         .font(.subheadline)
@@ -64,7 +65,7 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, 4)
                 }
-                
+
                 Spacer()
             }
             .padding()
@@ -122,24 +123,32 @@ struct ContentView: View {
     
     // FORM
     private func handleCreateReportTap() {
-        // Prefer device location if authorized and available
         let tempManager = CLLocationManager()
         let status = tempManager.authorizationStatus
         let center = locationManager.region.center
+        
+        // capture "now" once
+        let now = Date()
+        reportDate = now   // store it for UI display
         
         let hasValidDeviceLocation =
         (status == .authorizedWhenInUse || status == .authorizedAlways) &&
         !center.latitude.isZero && !center.longitude.isZero
         
         if hasValidDeviceLocation {
-            submitReport(lat: center.latitude, lng: center.longitude, description: descriptionText)
+            submitReport(
+                lat: center.latitude,
+                lng: center.longitude,
+                description: descriptionText,
+                createdAt: now
+            )
         } else {
-            // Prompt manual entry
             selectedLatString = ""
             selectedLngString = ""
             showManualLocationSheet = true
         }
     }
+
     
     private func submitManualLocation() {
         guard
@@ -150,20 +159,29 @@ struct ContentView: View {
             return
         }
         showManualLocationSheet = false
-        submitReport(lat: lat, lng: lng, description: descriptionText)
+        submitReport(lat: lat, lng: lng, description: descriptionText, createdAt: Date())
     }
     
-    private func submitReport(lat: Double, lng: Double, description: String) {
+    private func submitReport(
+        lat: Double,
+        lng: Double,
+        description: String,
+        createdAt: Date
+    ) {
         isSaving = true
         saveResultMessage = nil
         
-        ReportService.shared.submitReport(lat: lat, lng: lng, description: description) { result in
+        ReportService.shared.submitReport(
+            lat: lat,
+            lng: lng,
+            description: description,
+            createdAt: createdAt
+        ) { result in
             DispatchQueue.main.async {
                 self.isSaving = false
                 switch result {
                 case .success:
                     self.saveResultMessage = "Report created successfully."
-                    // Optionally clear description after success
                     self.descriptionText = ""
                 case .failure(let error):
                     self.saveResultMessage = "Failed to create report: \(error.localizedDescription)"
@@ -171,6 +189,7 @@ struct ContentView: View {
             }
         }
     }
+
     struct FormView: View {
         @State private var Title: String = ""
         @State private var IncidentDescription: String = ""

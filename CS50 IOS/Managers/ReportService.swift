@@ -10,7 +10,6 @@ import FirebaseFirestore
 
 final class ReportService {
 
-    // Singleton instance
     static let shared = ReportService()
 
     // Firestore reference
@@ -21,7 +20,6 @@ final class ReportService {
         self.db = Firestore.firestore()
     }
 
-    // Convenience accessor for the "reports" collection
     private var reportsCollection: CollectionReference {
         db.collection("reports")
     }
@@ -55,8 +53,8 @@ final class ReportService {
             }
             
         }
-   
     }
+    
     func fetchActiveReportsOnce(completion: @escaping (Result<[Report], Error>) -> Void) {
         print("fetchActiveReportsOnce called")
 

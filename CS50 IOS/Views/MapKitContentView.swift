@@ -7,6 +7,7 @@
 
 import Firebase
 import FirebaseFirestore
+import Foundation
 import SwiftUI
 import SwiftData
 import MapKit
@@ -67,7 +68,7 @@ class MapViewModel: ObservableObject {
         if let index = pins.firstIndex(where: { $0.id == updatedPin.id }) {
             pins[index] = updatedPin
         }
-        
+        savePinToFirestore(updatedPin)
     }
 }
     
@@ -121,9 +122,27 @@ struct MapKitContentView: View {
                     
                 )
                 .sheet(item: $selectedPin) { pin in
-                    PinEditorView(pin: pin) {
-                        updatedPin in
-                        viewModel.updatePin(updatedPin)
+                    PinEditorView(pin: pin) { updatedPin in
+                            // 1) Update pin locally + save to pins collection
+                            viewModel.updatePin(updatedPin)
+                            
+                            // 2) Also create a Report in the "reports" collection
+                            let description = updatedPin.subtitle
+                            let createdAt = Date()
+                            
+                            ReportService.shared.submitReport(
+                                lat: updatedPin.latitude,
+                                lng: updatedPin.longitude,
+                                description: description,
+                                createdAt: createdAt
+                            ) { result in
+                                switch result {
+                                case .success:
+                                    print("✅ Report created from pin.")
+                                case .failure(let error):
+                                    print("🔥 Failed to create report from pin: \(error.localizedDescription)")
+                                }
+                            }
                     }
                 }
                 
@@ -151,7 +170,6 @@ struct MapKitContentView: View {
                 }
                 
             }
-            
             
         }
     }

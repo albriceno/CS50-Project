@@ -61,7 +61,7 @@ struct ReportsTabView: View {
                     ReportDetailView(report: report)
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
-                        // 🔹 Fixed headline for every report
+                        // Fixed headline for every report
                         Text("Possible ICE Activity Reported")
                             .font(.headline)
                         

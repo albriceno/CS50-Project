@@ -71,71 +71,67 @@ class MapViewModel: ObservableObject {
     }
 }
     
-    struct MapKitContentView: View {
-        @Environment(\.modelContext) private var modelContext
-        @Query private var items: [Item]
-        @StateObject private var viewModel = MapViewModel()
-        @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        ))
-        
-        @State private var selectedPin: MapPin?
-        @State private var showingEditor = false
-        
-        var body: some View {
-            MapReader { proxy in
-                Map(position: $camera) {
-                    ForEach(viewModel.pins) { pin in
-                        Annotation(pin.title, coordinate: pin.coordinate) {
-                            VStack(spacing: 4) {
-                                Image(systemName: "mappin.circle.fill")
-                                    .font(.title)
-                                    .foregroundStyle(.red)
-                                
-                            }
-                            .onTapGesture {
-                                selectedPin = pin
-                            }
+struct MapKitContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var items: [Item]
+    @StateObject private var viewModel = MapViewModel()
+    @State private var camera = MapCameraPosition.region(MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    ))
+    
+    @State private var selectedPin: MapPin?
+    @State private var showingEditor = false
+    
+    var body: some View {
+        MapReader { proxy in
+            Map(position: $camera) {
+                ForEach(viewModel.pins) { pin in
+                    Annotation(pin.title, coordinate: pin.coordinate) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.title)
+                                .foregroundStyle(.red)
+                            
+                        }
+                        .onTapGesture {
+                            selectedPin = pin
                         }
                     }
-                    
-                }
-                
-                .gesture(
-                    TapGesture()
-                        .onEnded { _ in }
-                )
-                .simultaneousGesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                        .onEnded{ gesture in
-                            let tapPoint = gesture.location
-                            if let coordinate = proxy.convert(tapPoint, from: .local)
-                            {
-                                let newPin = viewModel.addPin(at: coordinate)
-                                selectedPin = newPin
-                            }
-                        }
-                    
-                )
-                .sheet(item: $selectedPin) { pin in
-                    PinEditorView(pin: pin) {
-                        updatedPin in
-                        viewModel.updatePin(updatedPin)
-                    }
-                }
-                
-                
-                
-                .mapControls {
-                    MapUserLocationButton()
-                    MapCompass()
                 }
                 
             }
             
+            .gesture(
+                TapGesture()
+                    .onEnded { _ in }
+            )
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded{ gesture in
+                        let tapPoint = gesture.location
+                        if let coordinate = proxy.convert(tapPoint, from: .local)
+                        {
+                            let newPin = viewModel.addPin(at: coordinate)
+                            selectedPin = newPin
+                        }
+                    }
+                
+            )
+            .sheet(item: $selectedPin) { pin in
+                PinEditorView(pin: pin) {
+                    updatedPin in
+                    viewModel.updatePin(updatedPin)
+                }
+            }
+            
+            .mapControls {
+                MapUserLocationButton()
+                MapCompass()
+            }
             
         }
         
-            
-        }
+        
+    }
+}

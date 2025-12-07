@@ -34,8 +34,6 @@ struct ContentView: View {
             VStack(spacing: 16) {
                 Text("ICE Activity Tracker - Backend Test")
                     .font(.headline)
-
-
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Description")

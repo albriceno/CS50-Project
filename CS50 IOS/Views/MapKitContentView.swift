@@ -106,7 +106,7 @@ struct MapKitContentView: View {
                 }
                 
                 .gesture(
-                    TapGesture()
+                    LongPressGesture(minimumDuration: 0.5)
                         .onEnded { _ in }
                 )
                 .simultaneousGesture(

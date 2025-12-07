@@ -1,4 +1,4 @@
-DESIGN - BACKEND
+DESIGN - BACKEND (TODO; WRITE ABT PACKAGE DEPENDENCIES)
 
 The backend of our project was responsible for designing, implementing, and maintaining the database that supports the user-facing features of the application. This meant building a system capable of capturing user-submitted reports of possible ICE activity, storing and retrieving map pins associated with those reports, and ensuring that these two pieces of functionality remained tightly connected to the MapKit interface. A central goal was to make the map itself the primary point of interaction: when a user tapped to add or edit a pin, the backend would automatically create or update the corresponding report in the database. This required a data model flexible enough to represent user-generated content in real time while remaining simple for map rendering. 
 

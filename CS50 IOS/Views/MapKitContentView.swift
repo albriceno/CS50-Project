@@ -20,6 +20,7 @@ struct MapPin: Identifiable {
     var subtitle: String
     var latitude: Double
     var longitude: Double
+    var createdAt: Date
     
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -29,13 +30,15 @@ struct MapPin: Identifiable {
         title: String,
         subtitle: String,
         latitude: Double,
-        longitude: Double
+        longitude: Double,
+        createdAt: Date = Date()
     ) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
         self.latitude = latitude
         self.longitude = longitude
+        self.createdAt = createdAt
     }
 }
 
@@ -47,7 +50,8 @@ class MapViewModel: ObservableObject {
             title: "ICE Spotted",
             subtitle: "",
             latitude: coordinate.latitude,
-            longitude: coordinate.longitude
+            longitude: coordinate.longitude,
+            createdAt: Date()
         )
         pins.append(newPin)
         savePinToFirestore(newPin)
@@ -68,7 +72,8 @@ class MapViewModel: ObservableObject {
             "title": pin.title,
             "subtitle": pin.subtitle,
             "latitude": pin.latitude,
-            "longitude": pin.longitude
+            "longitude": pin.longitude,
+            "createdAt": Timestamp(date: pin.createdAt)
         ]
         
         db.collection("pins").document(pin.id.uuidString).setData(data) { error in
@@ -83,7 +88,14 @@ class MapViewModel: ObservableObject {
     func loadPinsFromFirestore() {
         let db = Firestore.firestore()
         
-        db.collection("pins").getDocuments { snapshot, error in
+        // 4 hours ago
+        let cutoffDate = Date().addingTimeInterval(-4 * 60 * 60)
+        let cutoff = Timestamp(date: cutoffDate)
+
+        
+        db.collection("pins")
+            .whereField("createdAt", isGreaterThan: cutoff)
+            .getDocuments { snapshot, error in
             if let error = error {
                 print("Error loading pins: \(error.localizedDescription)")
                 return
@@ -102,7 +114,8 @@ class MapViewModel: ObservableObject {
                     let title = data["title"] as? String,
                     let subtitle = data["subtitle"] as? String,
                     let latitude = data["latitude"] as? Double,
-                    let longitude = data["longitude"] as? Double
+                    let longitude = data["longitude"] as? Double,
+                    let createdAtTimestamp = data["createdAt"] as? Timestamp
                 else {
                     print("Skipping pin \(doc.documentID) – invalid or missing fields")
                     return nil
@@ -113,7 +126,8 @@ class MapViewModel: ObservableObject {
                     title: title,
                     subtitle: subtitle,
                     latitude: latitude,
-                    longitude: longitude
+                    longitude: longitude,
+                    createdAt: createdAtTimestamp.dateValue()
                 )
             }
             
@@ -282,9 +296,3 @@ struct MapKitContentView: View {
     }
    
     }
-                            
-                 
-                        
-                        
-                       
-                    

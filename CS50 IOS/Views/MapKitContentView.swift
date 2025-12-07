@@ -209,30 +209,45 @@ struct MapKitContentView: View {
                 }
                 
                 VStack {
-                    HStack {
-                        Button("Zoom In") {
-                            
-                            currentDistance *= 0.8
-                            camera = .camera(
-                                MapCamera(
-                                    centerCoordinate: currentCenter,
-                                    distance: currentDistance
-                                )
-                            )
-                        }
-                        Button("Zoom Out") {
-                            
-                            currentDistance *= 1.2
-                            camera = .camera(
-                                MapCamera(
-                                    centerCoordinate: currentCenter,
-                                    distance: currentDistance
-                                )
-                            )
-                        }
-                    }
-                    .padding()
                     Spacer()
+                    HStack {
+                        Spacer()
+                        VStack(spacing: 5) {
+                            Button{
+                                currentDistance *= 0.8
+                                camera = .camera(
+                                    MapCamera(
+                                        centerCoordinate: currentCenter,
+                                        distance: currentDistance
+                                    )
+                                )
+                            } label : {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.blue)
+                            }
+                            
+                            
+                            Button{
+                                currentDistance *= 1.2
+                                camera = .camera(
+                                    MapCamera(
+                                        centerCoordinate: currentCenter,
+                                        distance: currentDistance
+                                    )
+                                )
+                            } label: {
+                                Image(systemName: "minus.circle.fill")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(.blue)
+                                
+                            }
+                            
+                        }
+                        .padding(.trailing, 16)
+                        .padding(.bottom, 175)
+                       
+                    }
                 }
             }
         }

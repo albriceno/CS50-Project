@@ -12,8 +12,6 @@ struct ContentView: View {
     // For collecting description and  coordinates
     @State private var descriptionText: String = ""
     @State private var showManualLocationSheet: Bool = false
-    @State private var selectedLat: Double?
-    @State private var selectedLng: Double?
     @State private var reportDate = Date()
     
     // Manual entry strings for the sheet
@@ -31,44 +29,48 @@ struct ContentView: View {
                     Label("Map", systemImage: "map")
                 }
             
-            // Create Report tab
-            VStack(spacing: 16) {
-                // 🔹 Fixed headline for every report
-                Text("Possible ICE Activity Reported")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .multilineTextAlignment(.center)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    TextEditor(text: $descriptionText)
-                        .frame(minHeight: 100)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.secondary.opacity(0.2))
-                        )
-                        .accessibilityLabel("Report description")
-                }
-
-                Button {
-                    handleCreateReportTap()
-                } label: {
-                    Text(isSaving ? "Saving..." : "Create Report")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(isSaving || descriptionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-
-                if let message = saveResultMessage {
-                    Text(message)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+            // CREATE REPORT TAB
+            ZStack {
+                // full-screen background
+                Color("AppBackground").ignoresSafeArea()
+                VStack(spacing: 16) {
+                    // Fixed headline for every report
+                    Text("Possible ICE Activity Reported")
+                        .font(.title3)
+                        .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 4)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        TextEditor(text: $descriptionText)
+                            .frame(minHeight: 100)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.secondary.opacity(0.2))
+                            )
+                            .accessibilityLabel("Report description")
+                    }
+                    
+                    Button {
+                        handleCreateReportTap()
+                    } label: {
+                        Text(isSaving ? "Saving..." : "Create Report")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(isSaving || descriptionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    
+                    if let message = saveResultMessage {
+                        Text(message)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 4)
+                    }
+                    
+                    Spacer()
                 }
-
-                Spacer()
+                .padding()
             }
-            .padding()
             .tabItem {
                 Label("Create Report", systemImage: "hammer")
             }
@@ -113,7 +115,8 @@ struct ContentView: View {
             .tabItem {
                 Label("Resources", systemImage: "book")
             }
-        // REPORTS TAB
+            
+            // REPORTS TAB
             ReportsTabView()
                 .tabItem {
                     Label("Reports", systemImage: "list.bullet")

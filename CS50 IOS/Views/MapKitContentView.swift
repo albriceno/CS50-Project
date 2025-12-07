@@ -145,6 +145,7 @@ struct MapKitContentView: View {
     var body: some View {
         MapReader { proxy in
             ZStack {
+                Color("AppBackground").ignoresSafeArea()
                 Map(position: $camera) {
                     ForEach(viewModel.pins) { pin in
                         Annotation(pin.title, coordinate: pin.coordinate) {
@@ -196,9 +197,10 @@ struct MapKitContentView: View {
                         ) { result in
                             switch result {
                             case .success:
-                                print("✅ Report created from pin.")
+                                print("Report created from pin.")
                             case .failure(let error):
                                 print("🔥 Failed to create report from pin: \(error.localizedDescription)")
+                                print("Failed to create report from pin: \(error.localizedDescription)")
                             }
                         }
                     }

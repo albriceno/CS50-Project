@@ -61,19 +61,22 @@ struct ReportsTabView: View {
                     ReportDetailView(report: report)
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
-                        // Fixed headline for every report
                         Text("Possible ICE Activity Reported")
                             .font(.headline)
-                        
-                        // Small metadata under the headline
                         Text(formatter.string(from: report.createdAt))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                    .padding(.vertical, 4)
+                    .padding(.vertical, 6)
                 }
             }
+            // This makes the list background the app color instead of system white
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackground").ignoresSafeArea())
+            
+            //  makes  header small and at the top
             .navigationTitle("Reports")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

@@ -32,6 +32,7 @@ struct CS50_IOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .tint(Color("AppAccent"))
         }
     }
 }

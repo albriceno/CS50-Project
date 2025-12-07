@@ -16,7 +16,7 @@ import Combine
 struct MapPin: Identifiable{
     let id = UUID()
     var title: String
-    @State var subtitle: String
+    var subtitle: String
     var latitude: Double
     var longitude: Double
     
@@ -39,7 +39,7 @@ class MapViewModel: ObservableObject {
         pins.append(newPin)
         
         savePinToFirestore(newPin)
-    
+        
         return newPin
     }
     
@@ -69,6 +69,7 @@ class MapViewModel: ObservableObject {
         }
         
     }
+}
     
     struct MapKitContentView: View {
         @Environment(\.modelContext) private var modelContext

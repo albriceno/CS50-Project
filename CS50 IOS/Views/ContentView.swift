@@ -8,10 +8,6 @@ struct ContentView: View {
     
     // Location manager to read device location
     @StateObject private var locationManager = LocationManager()
-=======
->>>>>>> 7d059c8de9f0a16e686772f0a55dd9e83970cf00
-    
-        
     var body: some View {
         TabView {
             // MAP TAB
@@ -19,11 +15,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
-            
-<<<<<<< HEAD
-                        
-=======
->>>>>>> 7d059c8de9f0a16e686772f0a55dd9e83970cf00
             // RESOURCES TAB
             NavigationSplitView {
                 List {

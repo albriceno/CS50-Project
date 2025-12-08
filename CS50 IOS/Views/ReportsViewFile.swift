@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
+// View model that gives a live-updating list of reports to SwiftUI views
 class LegacyReportsViewModel: ObservableObject {
     @Published var reports: [Report] = []
     private var listener: ListenerRegistration?
@@ -17,6 +18,7 @@ class LegacyReportsViewModel: ObservableObject {
         startListening()
     }
 
+    // Subscribe to Firestore for active (last 4 hours) reports
     func startListening() {
         listener = ReportService.shared.listenToActiveReports(
             onChange: { [weak self] reports in
@@ -30,6 +32,7 @@ class LegacyReportsViewModel: ObservableObject {
         )
     }
 
+    // When the view model is deallocated, stop listening to Firestore to prevent memory leaks
     deinit {
         listener?.remove()
     }

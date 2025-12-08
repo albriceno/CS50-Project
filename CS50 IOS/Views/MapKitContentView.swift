@@ -67,17 +67,20 @@ class MapViewModel: ObservableObject {
     
     func savePinToFirestore(_ pin: MapPin) {
         let db = Firestore.firestore()
+        // fields saved to 'pin' collection
         let data: [String: Any] = [
             "id": pin.id.uuidString,
             "title": pin.title,
             "subtitle": pin.subtitle,
             "latitude": pin.latitude,
             "longitude": pin.longitude,
+            // timestamp for later cutoff
             "createdAt": Timestamp(date: pin.createdAt)
         ]
         
         db.collection("pins").document(pin.id.uuidString).setData(data) { error in
             if let error = error {
+                // debgugging
                 print("Error saving pin: \(error.localizedDescription)")
             } else {
                 print("Pin saved successfully.")
@@ -88,12 +91,13 @@ class MapViewModel: ObservableObject {
     func loadPinsFromFirestore() {
         let db = Firestore.firestore()
         
-        // 4 hours ago
+        // 4 hours ago cut off
         let cutoffDate = Date().addingTimeInterval(-4 * 60 * 60)
         let cutoff = Timestamp(date: cutoffDate)
 
         
         db.collection("pins")
+            // filters recent pins only
             .whereField("createdAt", isGreaterThan: cutoff)
             .getDocuments { snapshot, error in
             if let error = error {
@@ -106,6 +110,7 @@ class MapViewModel: ObservableObject {
                 return
             }
             
+            // Convert each Firestore document back into a MapPin model
             let fetchedPins: [MapPin] = documents.compactMap { doc in
                 let data = doc.data()
                 guard
@@ -144,8 +149,6 @@ struct MapKitContentView: View {
     @StateObject private var viewModel = MapViewModel()
     
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-    
     @State private var camera = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
@@ -206,10 +209,10 @@ struct MapKitContentView: View {
                 
                 .sheet(item: $selectedPin) { pin in
                     PinEditorView(pin: pin) { updatedPin in
-                        // 1) Update pin locally + save to pins collection
+                        // Update pin locally + save to pins collection
                         viewModel.updatePin(updatedPin)
                         
-                        // 2) Also create a Report in the "reports" collection
+                        // Also create a Report in the "reports" collection
                         let description = updatedPin.subtitle
                         let createdAt = Date()
                         

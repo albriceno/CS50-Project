@@ -10,6 +10,7 @@ import SwiftUI
 struct ReportDetailView: View {
     let report: Report
     
+    // Local DateFormatter used to render the report timestamp
     private let formatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
@@ -74,7 +75,7 @@ struct ReportsTabView: View {
             .scrollContentBackground(.hidden)
             .background(Color("AppBackground").ignoresSafeArea())
             
-            //  makes  header small and at the top
+            // makes  header small and at the top
             .navigationTitle("Reports")
             .navigationBarTitleDisplayMode(.inline)
         }

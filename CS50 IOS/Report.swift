@@ -25,6 +25,7 @@ struct Report: Identifiable {
         return formatter.string(from: createdAt)
     }
     
+    // Convenience property to plug into MapKit annotations / markers
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: lat, longitude: lng)
     }

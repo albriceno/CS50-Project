@@ -14,13 +14,15 @@ import FirebaseAuth
 struct CS50_IOSApp: App {
 
     init() {
+        // Configure Firebase SDK
         FirebaseApp.configure()
         signInAnonymouslyIfNeeded()
     }
+    // Helper that signs the user in anonymously the first time they use the app
     private func signInAnonymouslyIfNeeded() {
-        // Sign in if not already authenticated
         if Auth.auth().currentUser == nil {
             Auth.auth().signInAnonymously { result, error in
+                // for debgging
                 if let error = error {
                     print("Firebase anonymous auth failed: \(error.localizedDescription)")
                 } else {
@@ -32,6 +34,7 @@ struct CS50_IOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                // global color
                 .tint(Color("AppAccent"))
         }
     }

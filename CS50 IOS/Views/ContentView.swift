@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // MAP TAB
-            MapKitContentView()
+            MapViewModel.MapKitContentView()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }

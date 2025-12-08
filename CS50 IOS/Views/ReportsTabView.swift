@@ -7,10 +7,56 @@
 
 import SwiftUI
 
+struct ReportDetailHeader: View {
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        ZStack {
+            // Centered bubble title
+            Text("Report Details")
+                .font(.headline)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 20)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(.systemBackground))
+                        .shadow(radius: 2, y: 1)
+                )
+                .frame(maxWidth: .infinity, alignment: .center)
+            
+            // Back button on top-left, not affecting centering
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.primary)
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(Color(.systemBackground))
+                                .shadow(radius: 2, y: 1)
+                        )
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+        .padding(.bottom, 6)
+        .padding(.top, 4)
+        .background(
+            Color("AppBackground")
+                .ignoresSafeArea(edges: .top)
+        )
+    }
+}
+
+
 struct ReportDetailView: View {
     let report: Report
     
-    // Local DateFormatter used to render the report timestamp
     private let formatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
@@ -20,28 +66,59 @@ struct ReportDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                // Headline
-                Text("Possible ICE Activity Reported")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+            VStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 16) {
+                    
+                    // Icon + title + time
+                    HStack(alignment: .top, spacing: 12) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(.red)
+                            .padding(.top, 2)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Possible ICE Activity Reported")
+                                .font(.headline)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text(formatter.string(from: report.createdAt))
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                    }
+                    
+                    Divider()
+                    
+                    // Description
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Description")
+                            .font(.subheadline.bold())
+                        
+                        Text(report.description)
+                            .font(.body)
+                            .foregroundColor(.primary)
+                    }
+                }
+                .padding(20)
+                .frame(maxWidth: .infinity)
+                .background(Color(.systemBackground))
+                .cornerRadius(20)
+                .shadow(radius: 2, y: 1)
+                .padding(.horizontal)
                 
-                // Date/time
-                Text("Reported at \(formatter.string(from: report.createdAt))")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                Divider()
-                
-                // Full description
-                Text(report.description)
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
+                Spacer(minLength: 8)
             }
-            .padding()
+            .padding(.top, 12)
         }
-        .navigationTitle("Report Details")
-        .navigationBarTitleDisplayMode(.inline)
+        .background(Color("AppBackground").ignoresSafeArea())
+        //
+        .safeAreaInset(edge: .top) {
+            ReportDetailHeader()
+        }
+        // hide system nav bar so only see custom header
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

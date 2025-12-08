@@ -22,12 +22,6 @@ PinEditorView serves for giving form to each pin sheet, where the default title 
 
 LocationManager's primary function is to handle the user's location and update the location as the user closes and opens the app, and defines the region for the location to be used in MapKitContentView. CoreLocation is imported into LocationManager and MapKitContentView to get the geographic location of the device using the app. The location permissions to this action can be found in the property list Info.plist, which asks the user for permission before using their location.
 
-
-
-
-
-
-
 DESIGN- UI
 
 The largest task for UI was the implementation of the Resources Page that is connected to the Navigation Bar in the app interface. The goals of the resource page was to put together contact information with various organizations in the Boston/Cambridge community that support immigrant communities through both community-building/community protection and legal services. We also wanted the page to be user-friendly and accesible while still providing ample resources and a "Know your Rights" page. The basic structure of the resources page is a list with different sections to keep the information organized with a more polished look than just a table. Each section is opened via a Naviagation Link and displays contact information for each resource. 

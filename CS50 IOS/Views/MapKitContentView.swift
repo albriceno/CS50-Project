@@ -179,34 +179,39 @@ class MapViewModel: ObservableObject {
                 }
         }
     }
+
     
-    struct MapKitContentView: View {
-        
-        //calling function for user location
-        @StateObject private var locationManager = LocationManager()
-        @StateObject private var viewModel = MapViewModel()
-        
-        @Environment(\.modelContext) private var modelContext
-        @Query private var items: [Item]
-        
-        //Property wrapped for camera to be modified as user explores map and changes the framing of the map, intialized here
-        @State private var camera = MapCameraPosition.region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
-                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )
+  
+}
+struct MapKitContentView: View {
+    
+    //calling function for user location
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var viewModel = MapViewModel()
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var items: [Item]
+    
+    //Property wrapped for camera to be modified as user explores map and changes the framing of the map, intialized here
+    @State private var camera = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182),
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         )
+    )
+    
+    @State private var selectedPin: MapPin?
+    @State private var showingEditor = false
+    
+    //center of map, intialized to Harvard, but does update when user clicks center on location
+    @State private var currentCenter = CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182)
+    
+    //zoom distance
+    @State private var currentDistance: CLLocationDistance = 1000
+    
+    var body: some View {
         
-        @State private var selectedPin: MapPin?
-        @State private var showingEditor = false
-        
-        //center of map, intialized to Harvard, but does update when user clicks center on location
-        @State private var currentCenter = CLLocationCoordinate2D(latitude: 42.3744, longitude: -71.1182)
-        
-        //zoom distance
-        @State private var currentDistance: CLLocationDistance = 1000
-        
-        var body: some View {
+        ZStack(alignment: .top) {
             //container view
             MapReader { proxy in
                 ZStack {
@@ -356,30 +361,40 @@ class MapViewModel: ObservableObject {
                     viewModel.loadPinsFromFirestore()
                 }
             }
+            //Header Text Box with instruction for user
+            Text("Double Tap to Create Report")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.black.opacity(0.5))
+                .padding(.top, 0)
+                .padding(.vertical, 4)
+                .ignoresSafeArea(edges: .top)
+        }
+    }
+    
+    //function that gives meaning to double tap gesture
+    private func handleMapTap(proxy: MapProxy, tapLocation: CGPoint) {
+        guard let coordinate = proxy.convert(tapLocation, from: .local) else {return}
+        
+        //not allowing user to create a pin where a pin is already located, or assures that tap is on map and not on pin
+        let TappedExistingPin = viewModel.pins.contains {
+            pin in
+            guard let pinPoint: CGPoint = proxy.convert(pin.coordinate, to: .local) else { return false }
+            let distance = hypot(pinPoint.x - tapLocation.x, pinPoint.y - tapLocation.y)
+            return distance < 30
         }
         
-        //function that gives meaning to double tap gesture
-        private func handleMapTap(proxy: MapProxy, tapLocation: CGPoint) {
-            guard let coordinate = proxy.convert(tapLocation, from: .local) else {return}
-            
-            //not allowing user to create a pin where a pin is already located, or assures that tap is on map and not on pin
-            let TappedExistingPin = viewModel.pins.contains {
-                pin in
-                guard let pinPoint: CGPoint = proxy.convert(pin.coordinate, to: .local) else { return false }
-                let distance = hypot(pinPoint.x - tapLocation.x, pinPoint.y - tapLocation.y)
-                return distance < 30
-            }
-            
-            if TappedExistingPin { return }
-            
-            let newPin = viewModel.addPin(at: coordinate)
-            
-            //pulls up sheet for user to edit description when pin is made
-            DispatchQueue.main.async {
-                selectedPin = newPin
-            }
-            
+        if TappedExistingPin { return }
+        
+        let newPin = viewModel.addPin(at: coordinate)
+        
+        //pulls up sheet for user to edit description when pin is made
+        DispatchQueue.main.async {
+            selectedPin = newPin
         }
         
     }
+    
 }

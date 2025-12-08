@@ -16,22 +16,13 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // MAP TAB
-            MapViewModel.MapKitContentView()
+            MapKitContentView()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
             // RESOURCES TAB
-            NavigationSplitView {
-                List {
-                    NavigationLink {
-                        ResourcesView()
-                    } label: {
-                        Label("Resources", systemImage: "book")
-                            .font(.headline)
-                    }
-                }
-            } detail: {
-                Text("Select a resource")
+            NavigationStack {
+                ResourcesView_Real()
             }
             .tabItem {
                 Label("Resources", systemImage: "book")

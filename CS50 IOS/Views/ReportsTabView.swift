@@ -53,75 +53,6 @@ struct ReportDetailHeader: View {
     }
 }
 
-
-struct ReportDetailView: View {
-    let report: Report
-    
-    private let formatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        df.timeStyle = .short
-        return df
-    }()
-    
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 16) {
-                    
-                    // Icon + title + time
-                    HStack(alignment: .top, spacing: 12) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 28))
-                            .foregroundColor(.red)
-                            .padding(.top, 2)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Possible ICE Activity Reported")
-                                .font(.headline)
-                                .multilineTextAlignment(.leading)
-                            
-                            Text(formatter.string(from: report.createdAt))
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        Spacer()
-                    }
-                    
-                    Divider()
-                    
-                    // Description
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("Description")
-                            .font(.subheadline.bold())
-                        
-                        Text(report.description)
-                            .font(.body)
-                            .foregroundColor(.primary)
-                    }
-                }
-                .padding(20)
-                .frame(maxWidth: .infinity)
-                .background(Color(.systemBackground))
-                .cornerRadius(20)
-                .shadow(radius: 2, y: 1)
-                .padding(.horizontal)
-                
-                Spacer(minLength: 8)
-            }
-            .padding(.top, 12)
-        }
-        .background(Color("AppBackground").ignoresSafeArea())
-        //
-        .safeAreaInset(edge: .top) {
-            ReportDetailHeader()
-        }
-        // hide system nav bar so only see custom header
-        .toolbar(.hidden, for: .navigationBar)
-    }
-}
-
 struct ReportRow: View {
     let report: Report
     let formatter: DateFormatter
@@ -179,7 +110,6 @@ struct ReportsHeader: View {
     }
 }
 
-
 struct ReportsTabView: View {
     @StateObject private var viewModel = LegacyReportsViewModel()
     
@@ -231,13 +161,13 @@ struct ReportsTabView: View {
                 }
             }
             //  Sticky boxed header at the top
-                    .safeAreaInset(edge: .top) {
-                        ReportsHeader()
-                            .background(Color("AppBackground").ignoresSafeArea(edges: .top))
-                            .offset(y: -16)
-                    }
-                    // hide system nav bar title
-                .toolbar(.hidden, for: .navigationBar)
+            .safeAreaInset(edge: .top) {
+                ReportsHeader()
+                    .background(Color("AppBackground").ignoresSafeArea(edges: .top))
+                    .offset(y: -16)
+            }
+            // hide system nav bar title
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

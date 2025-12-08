@@ -21,7 +21,7 @@ The Reports tab is denoted by a little three-line icon on the main navigation ba
 
 
 
-URL TO YOUTUBE VIDEO: 
+URL TO YOUTUBE VIDEO: https://youtu.be/M5yLXd9oHhM
 
 
 

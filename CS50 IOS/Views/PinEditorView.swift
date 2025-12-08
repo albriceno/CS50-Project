@@ -23,7 +23,7 @@ struct PinEditorView: View {
                     Text("Possible ICE Activity Reported")
                         .font(.headline)
                 }
-                // Description / notes the user can edit
+                // Description, notes the user can edit
                 Section(header: Text("Description")) {
                     TextField("Describe what you saw...", text: $pin.subtitle, axis: .vertical)
                         .lineLimit(3...6)

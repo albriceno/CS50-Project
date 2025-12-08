@@ -22,13 +22,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        //Asking user for location permissions
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.last else { return }
+           //Updating map with user's location
+        guard let location = locations.last else { return }
         
         let coord = location.coordinate
         

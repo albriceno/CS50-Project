@@ -12,7 +12,6 @@ Much of the backend implementation focused on structuring data in a way that kep
 
 Throughout development backend also throughly researched additional privacy-protecting technologies, such as encrypting payloads with CryptKit, location fuzzing, and removing image metadata. While these options could increase privacy, they either introduced significant complexity or compromised the accuracy required for the purpose of the app. Given the project timeline and the need to preserve geographic accuracy, we opted to focus on anonymous authentication, minimal data collection, and careful database structuring as the primary privacy safeguards. Future development would prioritize supporting image uploads while stripping EXIF metadata, and encrypting payloads with CryptKit to make it safe to begin working on push notifications for users in close proximity to a recent ICE report. 
 
-
 DESIGN - MAPKIT
 
 MapKit was a crucial part of our final project, providing the user with a map that displays alerts on ICE spottings and allows the user to make these alerts themselves. There were three main Swift files that contributed to the functionaility of this feature: MapKitContentView, PinEditorView, and LocationManager. MapKitContentView serves as the hub for pin creation and display, Map View display- including the zoom buttons-, and a handleMapTap function that ensures a pin is not created again when a user taps on an already existing pin (a bug that occurred during testing). 

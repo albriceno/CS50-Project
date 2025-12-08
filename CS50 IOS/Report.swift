@@ -5,8 +5,6 @@
 //  Created by Olivia Jimenez on 11/29/25.
 //
 
-// Customize later
-
 import Foundation
 import CoreLocation
 

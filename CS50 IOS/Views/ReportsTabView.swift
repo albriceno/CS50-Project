@@ -45,6 +45,64 @@ struct ReportDetailView: View {
     }
 }
 
+struct ReportRow: View {
+    let report: Report
+    let formatter: DateFormatter
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            // Alarm / ICE symbol
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 24))
+                .foregroundColor(.red)
+                .padding(.top, 4)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Possible ICE Activity Reported")
+                    .font(.headline)
+
+                Text(formatter.string(from: report.createdAt))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                Text("Tap for more details")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+            
+            // pushes everything to the leading side, lets the card fill the row
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Color(.systemBackground))
+        .cornerRadius(16)
+        .shadow(radius: 2, y: 1)
+        .frame(maxWidth: .infinity, alignment: .leading) // stretch card to full label width
+    }
+}
+
+struct ReportsHeader: View {
+    var body: some View {
+        VStack {
+            Text("Reports")
+                .font(.title3.bold())
+                .padding(.vertical, 8)
+                .padding(.horizontal, 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(.systemBackground))
+                        .shadow(radius: 3, y: 1)
+                )
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 8)
+        .padding(.bottom, 4)
+        .background(Color("AppBackground").ignoresSafeArea())
+    }
+}
+
+
 struct ReportsTabView: View {
     @StateObject private var viewModel = LegacyReportsViewModel()
     
@@ -55,29 +113,54 @@ struct ReportsTabView: View {
         return df
     }()
     
+    // Newest to oldest
+    private var sortedReports: [Report] {
+        viewModel.reports.sorted { $0.createdAt > $1.createdAt }
+    }
+    
     var body: some View {
         NavigationStack {
-            List(viewModel.reports) { report in
-                NavigationLink {
-                    ReportDetailView(report: report)
-                } label: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Possible ICE Activity Reported")
+            ZStack {
+                // Screen background
+                Color("AppBackground")
+                    .ignoresSafeArea()
+                
+                if sortedReports.isEmpty {
+                    VStack(spacing: 8) {
+                        Text("No recent reports")
                             .font(.headline)
-                        Text(formatter.string(from: report.createdAt))
-                            .font(.caption)
+                        Text("New reports will appear here for 4 hours after they are created.")
+                            .font(.subheadline)
                             .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
-                    .padding(.vertical, 6)
+                } else {
+                    List {
+                        ForEach(sortedReports) { report in
+                            NavigationLink {
+                                ReportDetailView(report: report)
+                            } label: {
+                                ReportRow(report: report, formatter: formatter)
+                            }
+                            .padding(.vertical, 4)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.clear)
                 }
             }
-            // This makes the list background the app color instead of system white
-            .scrollContentBackground(.hidden)
-            .background(Color("AppBackground").ignoresSafeArea())
-            
-            // makes  header small and at the top
-            .navigationTitle("Reports")
-            .navigationBarTitleDisplayMode(.inline)
+            //  Sticky boxed header at the top
+                    .safeAreaInset(edge: .top) {
+                        ReportsHeader()
+                            .background(Color("AppBackground").ignoresSafeArea(edges: .top))
+                            .offset(y: -16)
+                    }
+                    // hide system nav bar title
+                .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

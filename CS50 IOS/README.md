@@ -2,7 +2,7 @@ DOCUMENTATION
 
 General (How and where to compile, How it is configured):
 
-Camino Claro, the IOS app, is configured by the settings in the application Xcode and is compiled in a Library folder within our MacOs. It is configured using the Build Settings, Schemes, and Build Phases settings of the CS50 app target in Xcode.
+Camino Claro, the IOS app, is compiled in a Library folder within our MacOS. The process to compile the app can also be known as a "build". To build the app, the project owner must open the project in Xcode first. Xcode translates the source code, in the language Swift for our app, into binary code, and gathers all the Swift files created by us. Xcode then linkes the code and these assets, or files. Xcode then performs code signing, which the project owner must initiate by choosing their Apple ID as their team in the Signing and Capabilities settings of the CS50 Project. To intiate a build, the project owner opens the project in Xcode and must choose the destination of the app (we will put an iPhone simulator as the destination during the fair), and click the run button (displayed as a play icon) in the top left corner. If the destination is chosen to be a simulator, an iPhone simulator will then pop up on the screen and display the app. The app is configured using the Build Settings, Schemes, and Build Phases settings of the CS50 app target in Xcode.
 
 How to:
 
